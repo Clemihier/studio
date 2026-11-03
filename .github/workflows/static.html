@@ -1,9 +1,8 @@
-<!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>PPL Trainingsbuch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
-</head><body>
 <style>
 /* Layout: one phone-first logbook column; plate colours (IWF bumper: red 25 kg, blue 20 kg, yellow 15 kg) mark Push / Pull / Legs */
 :root{
@@ -108,14 +107,17 @@ textarea{width:100%;min-height:72px;resize:vertical}
 .hint.up{background:var(--good-bg);color:var(--good)}
 .hint.deload{background:var(--warn-bg);color:var(--warn)}
 
-.sets{display:grid;grid-template-columns:28px 1fr 1fr 28px;gap:6px 8px;align-items:center}
+.sets{display:grid;grid-template-columns:24px minmax(64px,auto) minmax(0,1fr) minmax(0,1fr) 22px;gap:6px 8px;align-items:center}
+.prev{font-size:14px;font-weight:600;color:var(--muted);text-align:center;white-space:nowrap;padding:4px 6px;border-radius:6px;background:var(--field)}
+.prev.beat{color:var(--good);background:var(--good-bg)}
+.prev.none{font-weight:500;opacity:.6;background:none}
 .sets .h{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .setno{font-family:var(--f-display);font-weight:700;font-size:19px;color:var(--muted);text-align:center}
 .sets input{width:100%;min-width:0;text-align:center;font-size:18px;font-weight:600;background:var(--field);border:1px solid var(--line);border-radius:8px;min-height:46px;padding:6px}
 .sets input::placeholder{color:var(--muted);opacity:.55;font-weight:500}
 .tick{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);justify-self:center}
-.row-done .tick{background:var(--good);border-color:var(--good)}
-.row-done .setno{color:var(--good)}
+.tick.done{background:var(--good);border-color:var(--good)}
+.setno.done{color:var(--good)}
 .ex-foot{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;align-items:center}
 .ex-foot .grp{display:flex;gap:8px}
 
@@ -161,8 +163,54 @@ th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertic
 th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
 td.num,th.num{text-align:right}
 
+.mob{gap:12px}
+.mob-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap}
+.mob-head h2{margin:0;font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:.02em}
+.mob-list{display:grid}
+.mobrow{display:grid;grid-template-columns:26px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.mobrow input{width:22px;height:22px;margin:0;accent-color:var(--good);cursor:pointer}
+.mobrow label{display:grid;gap:1px;cursor:pointer;min-width:0}
+.mobrow .mn{font-weight:600;font-size:15.5px}
+.mobrow .md{font-size:13.5px;color:var(--muted)}
+.mobrow input:checked + label .mn{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--good)}
+.mobplan{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14px}
 .empty{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);padding:22px;text-align:center;display:grid;gap:6px}
 .empty b{font-family:var(--f-display);font-size:20px}
+
+/* exercise images */
+.namerow{display:flex;align-items:flex-start;gap:8px}
+.imgbtn{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);cursor:pointer;vertical-align:middle}
+.imgbtn:hover{border-color:var(--muted)}
+.imgbtn svg{width:16px;height:16px}
+td .imgbtn,li .imgbtn,.altn .imgbtn{width:26px;height:26px;margin-left:4px}
+td .imgbtn svg,li .imgbtn svg,.altn .imgbtn svg{width:14px;height:14px}
+.altn{display:inline-flex;align-items:center;gap:2px;margin-right:6px}
+dialog.imgdlg{border:0;border-radius:14px;padding:0;width:calc(100vw - 32px);max-width:880px;max-height:calc(100vh - 32px);background:var(--surface);color:var(--ink);overflow:auto}
+dialog.imgdlg::backdrop{background:rgba(10,14,20,.66)}
+.dlg-in{padding:16px;display:grid;gap:12px}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dlg-head h2{margin:0;font-family:var(--f-display);font-weight:700;font-size:24px;line-height:1.1;text-wrap:balance}
+.dlg-imgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dlg-imgs.one{grid-template-columns:1fr;max-width:520px}
+@media (max-width:560px){.dlg-imgs{grid-template-columns:1fr}}
+.dlg-imgs figure{margin:0;display:grid;gap:6px}
+.dlg-imgs img{display:block;width:100%;height:auto;border-radius:8px;background:var(--field)}
+.dlg-imgs figcaption{font-family:var(--f-display);font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase}
+
+/* lock screen */
+.gate{display:grid;place-items:center;padding-block:56px}
+.gate-card{width:100%;max-width:380px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:14px}
+.gate-card h1{margin:0;font-family:var(--f-display);font-weight:700;font-size:34px;line-height:1}
+.plates{display:flex;gap:6px}
+.plates span{width:14px;height:14px;border-radius:50%}
+.gform{display:grid;gap:8px}
+.gform input[type="password"]{width:100%;min-width:0;background:var(--field);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:48px;font-size:17px}
+.gform .btn.primary{margin-top:6px}
+.check{display:flex;gap:8px;align-items:center;font-size:14px;cursor:pointer}
+.check input{width:18px;height:18px}
+.err{color:var(--crit);font-size:14px;min-height:1em}
+.lockbtn{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;color:var(--ink)}
+.lockbtn svg{width:18px;height:18px}
 
 /* plan */
 .weeks{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
@@ -186,13 +234,17 @@ ol.rules{margin:0;padding-left:20px;display:grid;gap:6px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 
-<div class="app">
+<div class="gate" id="gate">
+  <div class="gate-card"><h1>PPL Trainingsbuch</h1><p class="muted">Lädt …</p></div>
+</div>
+<div class="app" id="app" hidden>
   <header class="top">
     <div class="brand">
       <h1>PPL Trainingsbuch</h1>
       <div class="hdr-right">
         <div class="weekbadge num" id="weekbadge">Woche 1 / 12</div>
         <div class="elapsed num" id="elapsed" hidden><span class="el-l" id="elapsed-l">Dauer</span><span class="el-v" id="elapsed-v">0:00</span></div>
+        <button type="button" class="lockbtn" data-act="lock" aria-label="Trainingsbuch sperren" title="Sperren"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
       </div>
     </div>
     <nav class="tabs" role="tablist">
@@ -207,9 +259,10 @@ ol.rules{margin:0;padding-left:20px;display:grid;gap:6px}
     <section class="view" id="view-plan" role="tabpanel" hidden></section>
   </main>
 </div>
+<dialog class="imgdlg" id="imgdlg" aria-labelledby="dlg-title"></dialog>
 <div class="timer" id="timer" hidden>
   <div class="timer-in">
-    <span class="label" style="color:inherit;opacity:.75">Pause</span>
+    <span class="label" id="timer-l" style="color:inherit;opacity:.75">Pause</span>
     <span class="t num" id="timer-t">0:00</span>
     <span class="bar"><i id="timer-bar"></i></span>
     <button type="button" id="timer-plus">+30 s</button>
@@ -227,26 +280,55 @@ const PLAN = {
     {id:"incline",n:"Schrägbankdrücken Kurzhantel (30°)",alts:["Schrägbank an der Multipresse","Schrägbankdrücken Langhantel","Schrägbank-Brustpresse Maschine"],sets:3,lo:8,hi:10,rest:"2 min",rs:120,inc:2},
     {id:"ohp",n:"Schulterdrücken sitzend (Kurzhantel)",alts:["Schulterpresse Maschine","Schulterdrücken stehend (Langhantel)","Arnold Press"],sets:3,lo:6,hi:10,rest:"2 min",rs:120,inc:2},
     {id:"fly",n:"Kabel-Flys / Butterfly",alts:["Pec-Deck","Kurzhantel-Flys","Cable Crossover von unten"],sets:3,lo:12,hi:15,rest:"60–90 s",rs:75,inc:0},
-    {id:"lateral",n:"Seitheben (Kurzhantel oder Kabel)",alts:["Seitheben-Maschine","Seitheben einarmig am Kabel","Lean-away Seitheben (Kurzhantel)"],sets:4,lo:12,hi:20,rest:"60 s",rs:60,inc:0},
+    {id:"lateral",n:"Seitheben (Kurzhantel oder Kabel)",alts:["Seitheben sitzend (Kurzhantel)","Seitheben einarmig am Kabel","Lean-away Seitheben (Kurzhantel)"],sets:4,lo:12,hi:20,rest:"60 s",rs:60,inc:0},
     {id:"pushdown",n:"Trizepsdrücken am Kabel (Seil)",alts:["Dips am Gerät","Trizepsdrücken Kabel (Stange)","Enges Bankdrücken"],sets:3,lo:10,hi:15,rest:"60–90 s",rs:75,inc:0},
     {id:"ohext",n:"Überkopf-Trizepsstrecken (Kabel)",alts:["French Press SZ-Stange","Überkopf-Trizepsstrecken Kurzhantel","Trizepsstrecken-Maschine"],sets:3,lo:10,hi:15,rest:"60 s",rs:60,inc:0}]},
   pull:{name:"Pull",focus:"Rücken · hintere Schulter · Bizeps",ex:[
-    {id:"pullup",n:"Klimmzüge (ggf. mit Zusatzgewicht)",alts:["Latzug breit","Assistierte Klimmzüge (Maschine)","Latzug Untergriff eng"],sets:4,lo:6,hi:10,rest:"2–3 min",rs:150,inc:2.5,bw:true},
+    {id:"pullup",n:"Klimmzüge (ggf. mit Zusatzgewicht)",alts:["Latzug breit","Assistierte Klimmzüge (Band oder Maschine)","Latzug Untergriff eng"],sets:4,lo:6,hi:10,rest:"2–3 min",rs:150,inc:2.5,bw:true},
     {id:"bbrow",n:"Langhantelrudern vorgebeugt",alts:["Brustgestütztes Rudern Maschine","T-Bar-Rudern","Kurzhantelrudern auf Schrägbank"],sets:4,lo:6,hi:10,rest:"2 min",rs:120,inc:2.5},
     {id:"cablerow",n:"Kabelrudern sitzend, enger Griff",alts:["Einarmiges Kurzhantelrudern","Rudermaschine enger Griff","Kabelrudern einarmig"],sets:3,lo:10,hi:12,rest:"90 s",rs:90,inc:0},
-    {id:"pullover",n:"Lat-Pullover am Kabel",alts:["Latzug einarmig","Kurzhantel-Pullover","Pullover-Maschine"],sets:2,lo:12,hi:15,rest:"60–90 s",rs:75,inc:0},
+    {id:"pullover",n:"Lat-Pullover am Kabel",alts:["Latzug einarmig","Kurzhantel-Pullover","Lat-Pullover mit Seil am Kabel"],sets:2,lo:12,hi:15,rest:"60–90 s",rs:75,inc:0},
     {id:"facepull",n:"Face Pulls",alts:["Reverse Butterfly","Reverse Flys Kurzhantel","Seitheben vorgebeugt am Kabel"],sets:3,lo:15,hi:20,rest:"60 s",rs:60,inc:0},
     {id:"szcurl",n:"SZ-Curls",alts:["Kurzhantel-Curls","Langhantel-Curls","Bizepscurl-Maschine"],sets:3,lo:8,hi:12,rest:"60–90 s",rs:75,inc:0},
     {id:"hammer",n:"Hammercurls",alts:["Kabel-Curls mit Seil","Schrägbank-Curls Kurzhantel","Konzentrationscurls"],sets:3,lo:10,hi:12,rest:"60 s",rs:60,inc:0}]},
   legs:{name:"Legs",focus:"Quadrizeps · Beinbeuger · Gesäß · Waden · Bauch",ex:[
-    {id:"squat",n:"Kniebeuge (Langhantel)",alts:["Hackenschmidt","Pendelkniebeuge","Kniebeuge an der Multipresse"],sets:4,lo:5,hi:8,rest:"3 min",rs:180,inc:5},
+    {id:"squat",n:"Kniebeuge (Langhantel)",alts:["Hackenschmidt","Frontkniebeuge","Kniebeuge an der Multipresse"],sets:4,lo:5,hi:8,rest:"3 min",rs:180,inc:5},
     {id:"rdl",n:"Rumänisches Kreuzheben",alts:["Hip Thrust","Good Mornings","Rumänisches Kreuzheben Kurzhantel"],sets:3,lo:8,hi:10,rest:"2–3 min",rs:150,inc:5},
     {id:"legpress",n:"Beinpresse",alts:["Bulgarian Split Squats","Goblet Squats","Ausfallschritte mit Kurzhanteln"],sets:3,lo:10,hi:12,rest:"2 min",rs:120,inc:5},
-    {id:"legcurl",n:"Beinbeuger sitzend oder liegend",alts:["Nordic Curls (assistiert)","Beinbeuger stehend einbeinig","Kurzhantel-Beincurl liegend"],sets:3,lo:10,hi:15,rest:"90 s",rs:90,inc:0},
+    {id:"legcurl",n:"Beinbeuger sitzend",alts:["Nordic Curls (assistiert)","Beinbeuger stehend einbeinig","Beinbeuger liegend (Maschine)"],sets:3,lo:10,hi:15,rest:"90 s",rs:90,inc:0},
     {id:"legext",n:"Beinstrecker",alts:["Ausfallschritte gehend","Sissy Squats","Beinstrecker einbeinig"],sets:3,lo:12,hi:15,rest:"60–90 s",rs:75,inc:0},
     {id:"calf",n:"Wadenheben stehend",alts:["Wadenheben an der Beinpresse","Wadenheben sitzend","Wadenheben an der Multipresse"],sets:4,lo:10,hi:15,rest:"60 s",rs:60,inc:0},
     {id:"crunch",n:"Kabel-Crunches",alts:["Hängendes Beinheben","Crunch-Maschine","Ab-Wheel Rollouts"],sets:3,lo:12,hi:15,rest:"60 s",rs:60,inc:0}]}
 };
+const MOB = {
+  push:[
+    {id:"door",n:"Brust- und Schulterdehnung mit Stab",d:"2 × 30 s, Stab hinter dem Körper langsam anheben",t:30},
+    {id:"dislocate",n:"Schulterkreisen mit Stab (Dislocates)",d:"2 × 10 langsame Wiederholungen"},
+    {id:"openbook",n:"Rotationsdehnung im Sitzen (Brustwirbelsäule)",d:"2 × 8 pro Seite, Hände hinter dem Kopf"},
+    {id:"tricep",n:"Trizepsdehnung über Kopf",d:"2 × 30 s pro Seite",t:30},
+    {id:"wrist",n:"Unterarm- und Handgelenksdehnung",d:"30 s Beuger, 30 s Strecker",t:30}],
+  pull:[
+    {id:"hang",n:"Passives Hängen an der Klimmzugstange",d:"2 × 30 s, Schultern locker lassen",t:30},
+    {id:"lat",n:"Lat-Dehnung einarmig hängend",d:"2 × 20 s pro Seite, Füße bei Bedarf am Boden",t:20},
+    {id:"child",n:"Kindhaltung mit gestreckten Armen",d:"2 × 30 s, Arme nach links und rechts wandern",t:30},
+    {id:"biceps",n:"Bizepsdehnung an der Wand",d:"2 × 30 s pro Seite",t:30},
+    {id:"catcow",n:"Katze-Kuh",d:"10 langsame Wiederholungen"}],
+  legs:[
+    {id:"hipflexor",n:"Hüftbeuger-Dehnung im Halbkniestand",d:"2 × 30 s pro Seite, Gesäß anspannen",t:30},
+    {id:"ninety",n:"Gesäß mit der Faszienrolle",d:"60 s pro Seite",t:60},
+    {id:"pigeon",n:"Liegende Gesäßdehnung (Knie über den Körper)",d:"2 × 30 s pro Seite",t:30},
+    {id:"hamstring",n:"Beinbeuger-Dehnung liegend mit Band",d:"2 × 30 s pro Seite",t:30},
+    {id:"quad",n:"Quadrizeps-Dehnung in Seitlage",d:"2 × 30 s pro Seite",t:30},
+    {id:"calfstretch",n:"Wadendehnung an der Wand",d:"30 s gestreckt, 30 s gebeugt pro Seite",t:30}]
+};
+const IMGN = {"bbrow:0":2,"bbrow:1":2,"bbrow:2":2,"bbrow:3":2,"bench:0":2,"bench:1":2,"bench:2":2,"bench:3":2,"cablerow:0":2,"cablerow:1":2,"cablerow:2":2,"cablerow:3":2,"calf:0":2,"calf:1":2,"calf:2":2,"calf:3":2,"crunch:0":2,"crunch:1":2,"crunch:2":2,"crunch:3":2,"facepull:0":2,"facepull:1":2,"facepull:2":2,"facepull:3":2,"fly:0":2,"fly:1":2,"fly:2":2,"fly:3":2,"hammer:0":2,"hammer:1":2,"hammer:2":2,"hammer:3":2,"incline:0":2,"incline:1":2,"incline:2":2,"incline:3":2,"lateral:0":2,"lateral:1":2,"lateral:2":2,"lateral:3":2,"legcurl:0":2,"legcurl:1":2,"legcurl:2":2,"legcurl:3":2,"legext:0":2,"legext:1":2,"legext:2":2,"legext:3":2,"legpress:0":2,"legpress:1":2,"legpress:2":2,"legpress:3":2,"m:biceps":2,"m:calfstretch":2,"m:catcow":2,"m:child":2,"m:dislocate":2,"m:door":2,"m:hamstring":2,"m:hang":1,"m:hipflexor":2,"m:lat":2,"m:ninety":2,"m:openbook":2,"m:pigeon":2,"m:quad":2,"m:tricep":2,"m:wrist":2,"ohext:0":2,"ohext:1":2,"ohext:2":2,"ohext:3":2,"ohp:0":2,"ohp:1":2,"ohp:2":2,"ohp:3":2,"pullover:0":2,"pullover:1":2,"pullover:2":2,"pullover:3":2,"pullup:0":2,"pullup:1":2,"pullup:2":2,"pullup:3":2,"pushdown:0":2,"pushdown:1":2,"pushdown:2":2,"pushdown:3":2,"rdl:0":2,"rdl:1":2,"rdl:2":2,"rdl:3":2,"squat:0":2,"squat:1":2,"squat:2":2,"squat:3":2,"szcurl:0":2,"szcurl:1":2,"szcurl:2":2,"szcurl:3":2};
+const IMGNOTE = {"legpress:1":"Das Bild zeigt die Variante an der Multipresse.","pullup:2":"Das Bild zeigt die Variante mit Band.","bbrow:1":"Das Bild zeigt liegendes T-Bar-Rudern.","m:hang":"Arme gestreckt, Schultern locker, einfach hängen lassen.","m:door":"Alternativ geht die Dehnung auch am Türrahmen."};
+const imgFile = (k, i) => "img/" + k.replace(":", "-") + "-" + "ab"[i] + ".jpg";
+const IMG_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>';
+function imgBtn(key, name){
+  if (!IMGN[key]) return "";
+  return `<button type="button" class="imgbtn" data-act="img" data-k="${key}" data-n="${esc(name)}" aria-label="Start- und Endposition: ${esc(name)}" title="Start- und Endposition">${IMG_ICON}</button>`;
+}
 const EX = {}; DAYS.forEach(d => PLAN[d].ex.forEach(e => { EX[e.id] = Object.assign({day:d}, e); }));
 const PHASES = [
   {a:1,b:1,name:"Einpendeln",rir:"RIR 3",note:"Arbeitsgewichte im neuen Studio finden, Technik sauber.",kind:"light"},
@@ -288,8 +370,86 @@ const S = {
   confirmDiscard: false,
   confirmDelete: null,
   progressEx: "bench:0",
-  loadedOnce: false
+  loadedOnce: false,
+  gate: "loading",          // "loading" | "setup" | "enter" | "unlocked"
+  gateMsg: "",
+  lock: null,               // {salt, hash, iter, alg}
+  pwOpen: false
 };
+
+/* ---------- password lock ---------- */
+const PW_ITER = 200000, LOCK_LS = "ppl-lock-v1", REMEMBER_LS = "ppl-remember-v1", SESSION_SS = "ppl-unlocked-v1";
+const b64e = u8 => btoa(String.fromCharCode(...u8));
+const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function hashPw(pw, salt, iter, alg){
+  if (alg !== "fnv" && window.crypto && crypto.subtle) {
+    const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({name:"PBKDF2", salt:b64d(salt), iterations:iter, hash:"SHA-256"}, key, 256);
+    return {alg:"pbkdf2", hash:b64e(new Uint8Array(bits))};
+  }
+  let h = salt + "|" + pw, out = "";
+  for (let r = 0; r < 4; r++) { let x = 0x811c9dc5 ^ r; for (let k = 0; k < 4000; k++) for (let i = 0; i < h.length; i++) { x ^= h.charCodeAt(i); x = Math.imul(x, 16777619) >>> 0; } out += x.toString(16).padStart(8, "0"); h = out + h; }
+  return {alg:"fnv", hash:out};
+}
+async function makeLock(pw){
+  const salt = b64e(crypto.getRandomValues(new Uint8Array(16)));
+  const r = await hashPw(pw, salt, PW_ITER);
+  return {kind:"lock", alg:r.alg, salt, hash:r.hash, iter:PW_ITER, updatedAt:Date.now()};
+}
+async function checkPw(pw){ if (!S.lock) return false; const r = await hashPw(pw, S.lock.salt, S.lock.iter || PW_ITER, S.lock.alg); return r.hash === S.lock.hash; }
+async function saveLock(lock){
+  if (S.mode === "cloud") await col.doc("lock").set(lock);
+  else localStorage.setItem(LOCK_LS, JSON.stringify(lock));
+  S.lock = lock;
+}
+function lsLockRead(){ try { return JSON.parse(localStorage.getItem(LOCK_LS) || "null"); } catch(e){ return null; } }
+function remembered(){
+  if (!S.lock) return false;
+  try { if (sessionStorage.getItem(SESSION_SS) === S.lock.salt) return true; } catch(e) {}
+  try { const r = JSON.parse(localStorage.getItem(REMEMBER_LS) || "null"); if (r && r.salt === S.lock.salt && r.until > Date.now()) return true; } catch(e) {}
+  return false;
+}
+function markUnlocked(remember){
+  try { sessionStorage.setItem(SESSION_SS, S.lock.salt); } catch(e) {}
+  if (remember) { try { localStorage.setItem(REMEMBER_LS, JSON.stringify({salt:S.lock.salt, until:Date.now() + 30*864e5})); } catch(e) {} }
+}
+function forgetUnlock(){
+  try { sessionStorage.removeItem(SESSION_SS); } catch(e) {}
+  try { localStorage.removeItem(REMEMBER_LS); } catch(e) {}
+}
+function setGate(st){ S.gate = st; renderGate(); if (st === "unlocked") renderAll(); }
+function evalGate(fromServer){
+  if (S.gate === "loading") {
+    if (S.lock && S.lock.hash) setGate(remembered() ? "unlocked" : "enter");
+    else if (fromServer) setGate("setup");
+  } else if (S.gate === "enter" && fromServer && !S.lock) setGate("setup");
+}
+function renderGate(){
+  const g = $("#gate"), st = S.gate;
+  $("#app").hidden = st !== "unlocked";
+  g.hidden = st === "unlocked";
+  if (st === "unlocked") return;
+  clearInterval(TM.iv); $("#timer").hidden = true;
+  let body;
+  if (st === "loading") body = `<p class="muted">${esc(S.gateMsg || "Lädt …")}</p>`;
+  else if (st === "setup") body = `<p class="small">Lege ein Passwort fest. Ab dann fragt das Trainingsbuch bei jedem Öffnen danach.</p>
+    <form id="gate-setup" class="gform" novalidate>
+      <label class="label" for="g-new">Neues Passwort</label><input type="password" id="g-new" autocomplete="new-password">
+      <label class="label" for="g-new2">Passwort wiederholen</label><input type="password" id="g-new2" autocomplete="new-password">
+      <div class="err" id="g-err" aria-live="polite"></div>
+      <button class="btn primary" type="submit">Passwort festlegen</button>
+    </form>`;
+  else body = `<form id="gate-enter" class="gform" novalidate>
+      <label class="label" for="g-pw">Passwort</label><input type="password" id="g-pw" autocomplete="current-password">
+      <label class="check" for="g-remember"><input type="checkbox" id="g-remember"> Auf diesem Gerät 30 Tage entsperrt lassen</label>
+      <div class="err" id="g-err" aria-live="polite"></div>
+      <button class="btn primary" type="submit">Entsperren</button>
+    </form>
+    <div><button type="button" class="linkbtn" data-act="forgot">Passwort vergessen?</button></div>
+    <div id="g-forgot" class="small"></div>`;
+  g.innerHTML = `<div class="gate-card"><div class="plates" aria-hidden="true"><span class="p-push"></span><span class="p-pull"></span><span class="p-legs"></span></div><h1>PPL Trainingsbuch</h1>${body}</div>`;
+  const first = g.querySelector("input"); if (first) setTimeout(() => first.focus(), 0);
+}
 function weekOf(date){ return Math.floor((dayNum(date) - dayNum(S.settings.startDate)) / 7) + 1; }
 function phaseOf(w){ return PHASES.find(p => w >= p.a && w <= p.b) || (w < 1 ? PHASES[0] : {a:w,b:w,name:"Nach dem Block",rir:"frei",note:"Die 12 Wochen sind vorbei. Plane den nächsten Block.",kind:"light"}); }
 function sortedSessions(){
@@ -325,13 +485,17 @@ function suggestion(ex, last, week){
   if (!last) return {kg:null, text: week <= 1 ? "Gewicht neu einpendeln" : "Noch kein Vorwert", cls:""};
   const sets = doneSets(last.entry);
   const top = topSet(sets);
-  if (ph.deload) return {kg: top.kg ? Math.round(top.kg*0.9/1.25)*1.25 : top.kg, text:"Deload: ca. −10 %, weniger Sätze", cls:"deload"};
+  if (ph.deload) return {kg: top.kg, text:"Deload: etwas leichter als letztes Mal, weniger Sätze", cls:"deload"};
   const hit = sets.length >= ex.sets && sets.every(s => s.reps >= ex.hi);
   if (hit) {
-    if (ex.inc) return {kg:(top.kg||0) + ex.inc, text:`Ziel erreicht: +${fmtKg(ex.inc)} kg`, cls:"up"};
-    return {kg: top.kg, text:"Ziel erreicht: nächste Gewichtsstufe", cls:"up"};
+    return {kg: top.kg, text:"Ziel erreicht: Gewicht erhöhen", cls:"up"};
   }
   return {kg: top.kg, text:"Gleiches Gewicht, mehr Wiederholungen", cls:""};
+}
+function plannedKg(sug, last, i){
+  const ls = last ? doneSets(last.entry) : [];
+  if (!ls.length) return null;
+  return (ls[i] || ls[ls.length-1]).kg;
 }
 function targetSets(ex, week){ return phaseOf(week).deload ? Math.ceil(ex.sets/2) : ex.sets; }
 
@@ -342,11 +506,12 @@ function newDraft(day, date){
   PLAN[day].ex.forEach(ex => {
     const any = lastFor(ex.id, null, date);
     const v = any ? vOf(any.entry) : 0;
-    const sug = suggestion(ex, lastFor(ex.id, null, date, v), week);
+    const last = lastFor(ex.id, null, date, v);
+    const sug = suggestion(ex, last, week);
     const n = targetSets(ex, week);
-    entries[ex.id] = {v, sets: Array.from({length:n}, () => ({kg: sug.kg, reps: null}))};
+    entries[ex.id] = {v, sets: Array.from({length:n}, (_, i) => ({kg: plannedKg(sug, last, i), reps: null}))};
   });
-  return {id: "s" + date.replace(/-/g,"") + "-" + uid6(), kind:"session", date, day, entries, note:"", startTime:"", endTime:"", done:false, dirty:false, createdAt: Date.now()};
+  return {id: "s" + date.replace(/-/g,"") + "-" + uid6(), kind:"session", date, day, entries, note:"", mobility:{}, startTime:"", endTime:"", done:false, dirty:false, createdAt: Date.now()};
 }
 
 /* ---------- storage ---------- */
@@ -390,7 +555,7 @@ function scheduleDraftSave(){
 }
 function draftBody(){
   const d = S.draft;
-  return {kind:"session", date:d.date, day:d.day, week:weekOf(d.date), entries:JSON.parse(JSON.stringify(d.entries)), note:d.note||"", startTime:d.startTime||"", endTime:d.endTime||"", done:!!d.done, createdAt:d.createdAt||Date.now(), updatedAt:Date.now()};
+  return {kind:"session", date:d.date, day:d.day, week:weekOf(d.date), entries:JSON.parse(JSON.stringify(d.entries)), note:d.note||"", mobility:Object.assign({}, d.mobility||{}), startTime:d.startTime||"", endTime:d.endTime||"", done:!!d.done, createdAt:d.createdAt||Date.now(), updatedAt:Date.now()};
 }
 function persistDraft(){
   clearTimeout(saveTimer);
@@ -419,25 +584,37 @@ async function init(){
     S.mode = "cloud";
     col = db.collection("data/users/" + userId);
     setStatus("Lädt deine Einheiten …");
-    const timer = setTimeout(() => { if (!S.loadedOnce) { if (!S.draft) afterData(); setStatus("Deine Daten sind gerade nicht erreichbar. Eingaben werden gespeichert, sobald die Verbindung steht."); } }, 10000);
+    const timer = setTimeout(() => {
+      if (!S.loadedOnce) { if (!S.draft) afterData(); setStatus("Deine Daten sind gerade nicht erreichbar. Eingaben werden gespeichert, sobald die Verbindung steht."); }
+      if (S.gate === "loading") { S.gateMsg = "Dein Trainingsbuch ist gerade nicht erreichbar. Es wird weiter versucht …"; renderGate(); }
+    }, 10000);
     col.onSnapshot(snap => {
-      const sessions = {};
+      const sessions = {}; let lockDoc = null;
       snap.docs.forEach(d => {
         const v = d.data(); if (!v) return;
         if (d.id === "settings") { S.settings = Object.assign({}, S.settings, {startDate: v.startDate || S.settings.startDate, perWeek: v.perWeek || S.settings.perWeek}); }
+        else if (d.id === "lock") lockDoc = v;
         else if (v.kind === "session") sessions[d.id] = v;
       });
+      const fromServer = !snap.metadata.fromCache;
+      if (lockDoc || fromServer) S.lock = lockDoc;
       if (S.draft && S.draft.dirty && !sessions[S.draft.id]) sessions[S.draft.id] = draftBody();
       S.sessions = sessions;
-      if (!snap.metadata.fromCache) { clearTimeout(timer); if (!S.loadedOnce) setStatus(""); S.loadedOnce = true; }
+      if (fromServer) { clearTimeout(timer); if (!S.loadedOnce) setStatus(""); S.loadedOnce = true; }
       afterData();
-    }, err => { clearTimeout(timer); setStatus("Verbindung zu deinen Daten unterbrochen. Lade die Seite neu, um sie wieder abzurufen."); });
+      evalGate(fromServer);
+    }, err => {
+      clearTimeout(timer); setStatus("Verbindung zu deinen Daten unterbrochen. Lade die Seite neu, um sie wieder abzurufen.");
+      if (S.gate === "loading") { S.gateMsg = "Dein Trainingsbuch konnte nicht geladen werden. Lade die Seite neu."; renderGate(); }
+    });
   } else {
     S.mode = "local";
     const saved = lsRead();
     if (saved) { S.settings = Object.assign(S.settings, saved.settings || {}); S.sessions = saved.sessions || {}; }
+    S.lock = lsLockRead();
     S.loadedOnce = true;
     afterData();
+    evalGate(true);
   }
 }
 function afterData(){
@@ -471,6 +648,7 @@ function updateElapsed(){
 }
 setInterval(updateElapsed, 1000);
 function renderAll(){
+  if (S.gate !== "unlocked") return;
   renderHeader();
   updateElapsed();
   if (S.tab === "training") renderTraining();
@@ -490,11 +668,11 @@ function renderTraining(){
   let html = "";
   if (S.justFinished) {
     const f = S.justFinished;
-    html += `<div class="done-card"><h2>${esc(PLAN[f.day].name)} abgeschlossen</h2>
+    html += `<div class="done-card"><h2>${esc(PLAN[f.day].name)} abgeschlossen und gespeichert</h2>
       <div class="small">${f.dur != null ? `Dauer ${esc(fmtDur(f.dur))}, ` : ""}${f.sets} Sätze, ${f.reps} Wiederholungen, ${fmtKg(f.volume)} kg bewegtes Gewicht. Als Nächstes: <b>${esc(PLAN[sug].name)}</b>.</div>
       <div><button class="btn" data-act="dismiss-done">Ausblenden</button></div></div>`;
   }
-  if (S.mode === "local" && S.loadedOnce) html += `<div class="notice">Deine Einträge werden nur in diesem Browser auf diesem Gerät gespeichert. Sichere sie ab und zu per CSV-Export im Tab Plan.</div>`;
+  if (S.mode === "local" && S.loadedOnce) html += `<div class="notice">Du bist nicht angemeldet oder deine Daten sind hier nicht verfügbar. Einträge bleiben nur in diesem Browser gespeichert.</div>`;
   html += `<div class="controls${d.editingExisting ? " tri" : ""}">
     <div class="field datef"><label class="label" for="f-date">Datum</label><input type="date" id="f-date" value="${esc(d.date)}"></div>
     <div class="field"><label class="label" for="f-time">Start</label><div class="timefield"><input type="time" id="f-time" value="${esc(d.startTime || "")}">${d.editingExisting ? "" : `<button type="button" class="btn" data-act="now">Jetzt</button>`}</div></div>
@@ -506,6 +684,7 @@ function renderTraining(){
     <div id="daynote"></div>
     <div class="phase${ph.deload ? " deload" : ""}"><strong>Woche ${week < 1 ? "0" : week} · ${esc(ph.name)}</strong><span>${esc(ph.rir)}</span><span class="muted small">${esc(ph.note)}</span></div>`;
   html += PLAN[d.day].ex.map((ex, i) => exCard(ex, i, d, week)).join("");
+  html += mobCard(d);
   html += `<div class="finish">
     <div class="field"><label class="label" for="f-note">Notizen zur Einheit</label><textarea id="f-note" placeholder="z. B. Schulter links gezwickt, Beinpresse Gerät 2">${esc(d.note)}</textarea></div>
     <div class="finish-row">
@@ -520,6 +699,19 @@ function renderTraining(){
   v.innerHTML = html;
   markRows();
 }
+function mobCount(day, m){ return MOB[day].filter(x => m && m[x.id]).length; }
+function mobCard(d){
+  const m = d.mobility || (d.mobility = {});
+  return `<section class="ex mob" aria-labelledby="mob-h">
+    <div class="mob-head"><h2 id="mob-h">Stretching &amp; Mobility</h2><span class="muted small num" id="mob-count">${mobCount(d.day, m)} / ${MOB[d.day].length} erledigt · ca. 10 min</span></div>
+    <div class="mob-list">${MOB[d.day].map(x => `<div class="mobrow">
+      <input type="checkbox" id="mob-${x.id}" data-mob="${x.id}" ${m[x.id] ? "checked" : ""}>
+      <label for="mob-${x.id}"><span class="mn">${esc(x.n)}</span><span class="md">${esc(x.d)}</span></label>
+      ${imgBtn("m:" + x.id, x.n) || "<span></span>"}
+      ${x.t ? `<button type="button" class="btn" data-act="rest" data-s="${x.t}" data-l="Halten">${x.t} s</button>` : "<span></span>"}
+    </div>`).join("")}</div>
+  </section>`;
+}
 function exCard(ex, i, d, week){
   const e = d.entries[ex.id] || (d.entries[ex.id] = {v:0, sets:[]});
   const v = vOf(e);
@@ -533,15 +725,18 @@ function exCard(ex, i, d, week){
     lastHtml = `<span><span class="muted">Letztes Mal ${esc(fmtDate(last.session.date))}:</span> <b class="num">${esc(setsText(ls, ex.bw))}</b></span>`;
   }
   lastHtml += `<span class="hint ${sug.cls}">${esc(sug.text)}</span>`;
+  const lsets = last ? doneSets(last.entry) : [];
+  const prevTxt = p => ex.bw ? `${p.kg ? "+" + fmtKg(p.kg) : "BW"}×${p.reps}` : `${p.kg == null ? "–" : fmtKg(p.kg)}×${p.reps}`;
   const rows = e.sets.map((s, j) => `
-    <div class="setno">${j+1}</div>
+    <div class="setno" data-row="${j}">${j+1}</div>
+    ${lsets[j] ? `<div class="prev num" data-row="${j}" data-pkg="${lsets[j].kg ?? 0}" data-preps="${lsets[j].reps}" title="Satz ${j+1} letztes Mal">${esc(prevTxt(lsets[j]))}</div>` : `<div class="prev none" data-row="${j}">–</div>`}
     <input class="num" inputmode="decimal" aria-label="Satz ${j+1} Gewicht in kg" id="kg-${ex.id}-${j}" data-ex="${ex.id}" data-i="${j}" data-f="kg" value="${esc(fmtKg(s.kg))}" placeholder="${ex.bw ? "+kg" : "kg"}">
     <input class="num" inputmode="numeric" aria-label="Satz ${j+1} Wiederholungen" id="reps-${ex.id}-${j}" data-ex="${ex.id}" data-i="${j}" data-f="reps" value="${s.reps == null ? "" : s.reps}" placeholder="${ex.lo}–${ex.hi}">
-    <span class="tick" aria-hidden="true"></span>`).join("");
+    <span class="tick" data-row="${j}" aria-hidden="true"></span>`).join("");
   return `<article class="ex" data-exid="${ex.id}">
     <div class="ex-head">
       <div class="ex-no">${i+1}</div>
-      <div><div class="ex-name">${esc(name)}</div>
+      <div><div class="namerow"><div class="ex-name">${esc(name)}</div>${imgBtn(ex.id + ":" + v, name)}</div>
         <div class="ex-target num">${tgt} × ${ex.lo}–${ex.hi} Wdh. · Pause ${esc(ex.rest)}${tgt !== ex.sets ? " · Deload" : ""}</div>
         ${v ? `<div class="ex-target">statt ${esc(ex.n)}</div>` : ""}
       </div>
@@ -552,7 +747,7 @@ function exCard(ex, i, d, week){
     </div>` : ""}
     <div class="last">${lastHtml}</div>
     <div class="sets" data-sets="${ex.id}">
-      <span></span><span class="h">${ex.bw ? "Zusatz-kg" : "kg"}</span><span class="h">Wdh. geschafft</span><span></span>
+      <span></span><span class="h" style="text-align:center">Vorher</span><span class="h">${ex.bw ? "Zusatz-kg" : "kg"}</span><span class="h">Wdh. geschafft</span><span></span>
       ${rows}
     </div>
     <div class="ex-foot">
@@ -564,10 +759,11 @@ function exCard(ex, i, d, week){
 function markRows(){
   document.querySelectorAll("[data-sets]").forEach(g => {
     const id = g.dataset.sets, sets = S.draft.entries[id].sets;
-    const inputs = g.querySelectorAll('input[data-f="reps"]');
-    inputs.forEach((inp, j) => {
-      const ok = sets[j] && sets[j].reps > 0;
-      [inp.previousElementSibling.previousElementSibling, inp.previousElementSibling, inp, inp.nextElementSibling].forEach(el => el && el.classList.toggle("row-done", !!ok));
+    sets.forEach((st, j) => {
+      const ok = st && st.reps > 0;
+      g.querySelectorAll(`[data-row="${j}"]`).forEach(el => el.classList.toggle("done", !!ok));
+      const pv = g.querySelector(`.prev[data-row="${j}"][data-preps]`);
+      if (pv) { const pk = +pv.dataset.pkg, pr = +pv.dataset.preps, k = st.kg || 0; pv.classList.toggle("beat", !!ok && (k > pk || (k === pk && st.reps > pr))); }
     });
   });
   const has = Object.values(S.draft.entries).some(e => doneSets(e).length);
@@ -627,6 +823,7 @@ function renderVerlauf(){
           <span class="chev" aria-hidden="true">›</span></summary>
         <div class="sess-body">
           <div class="lines">${lines || `<span class="muted small">Keine Sätze eingetragen.</span>`}</div>
+          ${s.mobility ? `<div class="small"><span class="label">Stretching &amp; Mobility</span> <span class="num">${mobCount(s.day, s.mobility)} / ${MOB[s.day].length} erledigt</span></div>` : ""}
           ${s.note ? `<div class="small"><span class="label">Notiz</span><br>${esc(s.note)}</div>` : ""}
           <div class="finish-row">
             <button class="btn" data-act="edit" data-sid="${s.id}">Bearbeiten</button>
@@ -688,8 +885,10 @@ function renderPlan(){
   const phs = PHASES.map(p => `<div><b class="num">Woche ${p.a===p.b ? p.a : p.a+"–"+p.b}</b><span><b>${esc(p.name)}</b> · ${esc(p.rir)}. <span class="muted">${esc(p.note)}</span></span></div>`).join("");
   const days = DAYS.map(d => `<div class="panel dayplan"><h3><span class="daychip p-${d} ${d}">${PLAN[d].name}</span><span class="muted small" style="font-family:var(--f-body);font-weight:500">${esc(PLAN[d].focus)}</span></h3>
     <div class="tbl"><table><thead><tr><th>#</th><th>Übung</th><th class="num">Sätze × Wdh.</th><th>Pause</th><th>Alternativen</th></tr></thead><tbody>
-    ${PLAN[d].ex.map((ex,i) => `<tr><td class="num">${i+1}</td><td>${esc(ex.n)}</td><td class="num">${ex.sets} × ${ex.lo}–${ex.hi}</td><td>${esc(ex.rest)}</td><td class="muted">${esc(ex.alts.join(" · "))}</td></tr>`).join("")}
-    </tbody></table></div></div>`).join("");
+    ${PLAN[d].ex.map((ex,i) => `<tr><td class="num">${i+1}</td><td>${esc(ex.n)}${imgBtn(ex.id + ":0", ex.n)}</td><td class="num">${ex.sets} × ${ex.lo}–${ex.hi}</td><td>${esc(ex.rest)}</td><td class="muted">${ex.alts.map((a, k) => `<span class="altn">${esc(a)}${imgBtn(ex.id + ":" + (k+1), a)}</span>`).join("")}</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="label">Danach: Stretching &amp; Mobility, ca. 10 min</div>
+    <ol class="mobplan">${MOB[d].map(x => `<li><b>${esc(x.n)}</b>${imgBtn("m:" + x.id, x.n)} <span class="muted">· ${esc(x.d)}</span></li>`).join("")}</ol></div>`).join("");
   v.innerHTML = `
   <div class="panel"><h2>12 Wochen auf einen Blick</h2>
     <div class="weeks">${cells}</div>
@@ -700,7 +899,7 @@ function renderPlan(){
   <div class="panel"><h2>So steigerst du</h2>
     <ol class="rules">
       <li>Arbeite im angegebenen Wiederholungsbereich.</li>
-      <li>Schaffst du in allen Sätzen das obere Ende sauber, erhöhe beim nächsten Mal: +2,5 kg bei Oberkörper-Grundübungen, +5 kg bei Kniebeuge, RDL und Beinpresse, bei Isolationsübungen die kleinste Stufe. Die App schlägt das Gewicht vor.</li>
+      <li>Schaffst du in allen Sätzen das obere Ende sauber, erhöhe beim nächsten Mal um die nächste Stufe, die das Gerät oder die Hantel hergibt. Die App trägt immer deine Gewichte von letztem Mal ein und zeigt „Ziel erreicht: Gewicht erhöhen“, wenn es so weit ist. Das neue Gewicht trägst du selbst ein.</li>
       <li>Mit dem neuen Gewicht startest du wieder unten im Bereich und arbeitest dich hoch.</li>
       <li>Stagnierst du zwei Einheiten in Folge, senke das Gewicht um etwa 10 % und baue neu auf.</li>
     </ol>
@@ -711,7 +910,18 @@ function renderPlan(){
       <div class="field"><label class="label" for="f-perweek">Einheiten pro Woche</label><select id="f-perweek"><option value="3" ${S.settings.perWeek==3?"selected":""}>3</option><option value="4" ${S.settings.perWeek==4?"selected":""}>4</option></select></div>
     </div>
     <div class="small muted">${S.mode === "cloud" ? "Deine Einträge sind privat in deinem Konto gespeichert und auf allen Geräten verfügbar, auf denen du angemeldet bist." : "Einträge bleiben nur in diesem Browser gespeichert."}</div>
-    <div class="finish-row"><button class="btn" data-act="export">Alle Einträge als CSV exportieren</button><span class="status" id="exportstatus"></span></div>
+    ${downloads ? `<div class="finish-row"><button class="btn" data-act="export">Alle Einträge als CSV exportieren</button><span class="status" id="exportstatus"></span></div>` : ""}
+  </div>
+  <div class="panel"><h2>Passwortschutz</h2>
+    <div class="small muted">Das Trainingsbuch fragt bei jedem Öffnen nach deinem Passwort. Mit dem Schloss oben rechts sperrst du es sofort.</div>
+    <div class="finish-row"><button class="btn" data-act="lock">Jetzt sperren</button><button class="btn" data-act="pw-toggle" aria-expanded="${S.pwOpen}">Passwort ändern</button><span class="status" id="pw-status" aria-live="polite"></span></div>
+    ${S.pwOpen ? `<form id="pw-change" class="gform" novalidate style="max-width:360px">
+      <label class="label" for="pw-cur">Aktuelles Passwort</label><input type="password" id="pw-cur" autocomplete="current-password">
+      <label class="label" for="pw-new">Neues Passwort</label><input type="password" id="pw-new" autocomplete="new-password">
+      <label class="label" for="pw-new2">Neues Passwort wiederholen</label><input type="password" id="pw-new2" autocomplete="new-password">
+      <div class="err" aria-live="polite"></div>
+      <div class="finish-row"><button class="btn primary" type="submit">Neues Passwort speichern</button><button class="btn ghost" type="button" data-act="pw-toggle">Abbrechen</button></div>
+    </form>` : ""}
   </div>`;
 }
 
@@ -737,8 +947,8 @@ document.addEventListener("click", e => {
     S.swapOpen = null;
     if (vOf(en) !== nv) {
       en.v = nv; delete en.alt;
-      const sug = suggestion(ex, lastFor(ex.id, d.id, d.date, nv), weekOf(d.date));
-      en.sets.forEach(s => { if (!(s.reps > 0)) s.kg = sug.kg; });
+      const lst = lastFor(ex.id, d.id, d.date, nv), sug = suggestion(ex, lst, weekOf(d.date));
+      en.sets.forEach((s, i) => { if (!(s.reps > 0)) s.kg = plannedKg(sug, lst, i); });
       scheduleDraftSave();
     }
     renderTraining(); return;
@@ -747,7 +957,7 @@ document.addEventListener("click", e => {
   if (act === "addset") { const s = d.entries[b.dataset.ex].sets; const prev = s[s.length-1]; s.push({kg: prev ? prev.kg : null, reps:null}); scheduleDraftSave(); renderTraining(); focusLater(`#reps-${b.dataset.ex}-${s.length-1}`); return; }
   if (act === "delset") { d.entries[b.dataset.ex].sets.pop(); scheduleDraftSave(); renderTraining(); return; }
   if (act === "copylast") { const last = lastFor(b.dataset.ex, d.id, d.date, vOf(d.entries[b.dataset.ex])); if (!last) return; const ls = doneSets(last.entry); d.entries[b.dataset.ex].sets.forEach((s, i) => { s.kg = (ls[i] || ls[ls.length-1]).kg; }); scheduleDraftSave(); renderTraining(); return; }
-  if (act === "rest") { startTimer(+b.dataset.s); return; }
+  if (act === "rest") { startTimer(+b.dataset.s, b.dataset.l || "Pause"); return; }
   if (act === "finish") { finishSession(); return; }
   if (act === "discard") { S.confirmDiscard = true; renderTraining(); return; }
   if (act === "discard-no") { S.confirmDiscard = false; renderTraining(); return; }
@@ -758,6 +968,49 @@ document.addEventListener("click", e => {
   if (act === "del-no") { S.confirmDelete = null; renderVerlauf(); return; }
   if (act === "del-yes") { const id = b.dataset.sid; delete S.sessions[id]; S.confirmDelete = null; writeDoc(id, null); if (S.draft && S.draft.id === id) S.draft = newDraft(suggestedDay(), todayStr()); renderVerlauf(); return; }
   if (act === "export") { exportCsv(); return; }
+  if (act === "img") { openImg(b.dataset.k, b.dataset.n); return; }
+  if (act === "img-close") { closeImg(); return; }
+  if (act === "lock") { if (S.draft && S.draft.dirty) persistDraft(); forgetUnlock(); S.pwOpen = false; setGate(S.lock ? "enter" : "setup"); window.scrollTo({top:0}); return; }
+  if (act === "pw-toggle") { S.pwOpen = !S.pwOpen; renderPlan(); if (S.pwOpen) focusLater("#pw-cur"); return; }
+  if (act === "forgot") {
+    $("#g-forgot").innerHTML = S.mode === "cloud"
+      ? `Sag Claude im Chat, dass die Sperre deines PPL Trainingsbuchs zurückgesetzt werden soll. Deine Trainingsdaten bleiben dabei erhalten, danach legst du hier ein neues Passwort fest.`
+      : `Hier sind die Einträge nur in diesem Browser gespeichert. Das Passwort lässt sich nur zusammen mit ihnen löschen. <div class="confirm" style="margin-top:8px"><button type="button" class="btn danger" data-act="local-reset">Sperre und Einträge löschen</button></div>`;
+    return;
+  }
+  if (act === "local-reset") {
+    try { localStorage.removeItem(LOCK_LS); localStorage.removeItem(LS_KEY); } catch(e) {}
+    forgetUnlock(); S.lock = null; S.sessions = {}; S.draft = newDraft("push", todayStr()); setGate("setup"); return;
+  }
+});
+document.addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, btn = f.querySelector('button[type="submit"]'), err = f.querySelector(".err");
+  const say = t => { if (err) err.textContent = t; };
+  if (f.id === "gate-setup" || f.id === "pw-change") {
+    const isChange = f.id === "pw-change";
+    const n1 = f.querySelector(isChange ? "#pw-new" : "#g-new").value, n2 = f.querySelector(isChange ? "#pw-new2" : "#g-new2").value;
+    if (n1.length < 4) { say("Das Passwort braucht mindestens 4 Zeichen."); return; }
+    if (n1 !== n2) { say("Die beiden Passwörter stimmen nicht überein."); return; }
+    btn.disabled = true; say("");
+    try {
+      if (isChange && !(await checkPw(f.querySelector("#pw-cur").value))) { say("Das aktuelle Passwort stimmt nicht."); btn.disabled = false; return; }
+      let keep = false; try { keep = !!localStorage.getItem(REMEMBER_LS); } catch(x) {}
+      await saveLock(await makeLock(n1));
+      forgetUnlock(); markUnlocked(isChange && keep);
+      if (isChange) { S.pwOpen = false; renderPlan(); const st = $("#pw-status"); if (st) st.textContent = "Passwort geändert."; }
+      else setGate("unlocked");
+    } catch(x) { say("Das Passwort konnte nicht gespeichert werden. Prüfe die Verbindung und versuch es noch einmal."); btn.disabled = false; }
+    return;
+  }
+  if (f.id === "gate-enter") {
+    const pw = f.querySelector("#g-pw");
+    if (!pw.value) { say("Gib dein Passwort ein."); return; }
+    btn.disabled = true; say("");
+    const ok = await checkPw(pw.value);
+    if (ok) { markUnlocked(f.querySelector("#g-remember").checked); setGate("unlocked"); }
+    else { say("Falsches Passwort. Versuch es noch einmal."); pw.value = ""; pw.focus(); btn.disabled = false; }
+  }
 });
 document.addEventListener("toggle", e => { const el = e.target; if (el.matches && el.matches("details.sess") && el.open) S.openSession = el.dataset.sid; }, true);
 document.addEventListener("input", e => {
@@ -768,6 +1021,12 @@ document.addEventListener("input", e => {
     else { const v = parseNum(t.value); s.reps = v == null ? null : Math.max(0, Math.round(v)); }
     if (!S.draft.startTime && !S.draft.editingExisting && s.reps > 0 && S.draft.date === todayStr()) { S.draft.startTime = nowHM(); const ft = $("#f-time"); if (ft) ft.value = S.draft.startTime; updateElapsed(); }
     markRows(); scheduleDraftSave(); requestWake(); return;
+  }
+  if (t.dataset && t.dataset.mob && S.draft) {
+    (S.draft.mobility = S.draft.mobility || {})[t.dataset.mob] = t.checked;
+    if (!t.checked) delete S.draft.mobility[t.dataset.mob];
+    const c = $("#mob-count"); if (c) c.textContent = `${mobCount(S.draft.day, S.draft.mobility)} / ${MOB[S.draft.day].length} erledigt · ca. 10 min`;
+    scheduleDraftSave(); return;
   }
   if (t.id === "f-note") { S.draft.note = t.value; scheduleDraftSave(); return; }
 });
@@ -817,9 +1076,27 @@ function discardDraft(){
   renderTraining();
 }
 
+/* ---------- exercise images ---------- */
+function openImg(k, name){
+  const dlg = $("#imgdlg"), n = IMGN[k] || 0;
+  if (!n) return;
+  const cap = n === 1 ? ["Position"] : ["1 · Start", "2 · Ende"];
+  dlg.innerHTML = `<div class="dlg-in">
+    <div class="dlg-head"><h2 id="dlg-title">${esc(name)}</h2><button type="button" class="btn" data-act="img-close">Schließen</button></div>
+    <div class="dlg-imgs${n === 1 ? " one" : ""}">${cap.map((c, i) => `<figure><img src="${imgFile(k, i)}" alt="${esc(name)}: ${i ? "Endposition" : "Startposition"}" width="640" height="427"><figcaption>${c}</figcaption></figure>`).join("")}</div>
+    ${IMGNOTE[k] ? `<div class="small">${esc(IMGNOTE[k])}</div>` : ""}
+    <div class="small muted">Bilder: Free Exercise DB, gemeinfrei</div>
+  </div>`;
+  dlg.querySelectorAll("img").forEach(im => im.addEventListener("load", () => { im.removeAttribute("height"); }, {once:true}));
+  try { dlg.showModal(); } catch(e) { dlg.setAttribute("open", ""); }
+}
+function closeImg(){ const dlg = $("#imgdlg"); try { dlg.close(); } catch(e) { dlg.removeAttribute("open"); } }
+$("#imgdlg").addEventListener("click", e => { if (e.target.id === "imgdlg") closeImg(); });
+
 /* ---------- rest timer ---------- */
 const TM = {end:0, total:0, iv:null, beeped:false, ctx:null};
-function startTimer(sec){
+function startTimer(sec, label){
+  $("#timer-l").textContent = label || "Pause";
   try { TM.ctx = TM.ctx || new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
   TM.total = sec; TM.end = Date.now() + sec*1000; TM.beeped = false;
   $("#timer").hidden = false; clearInterval(TM.iv); TM.iv = setInterval(tick, 250); tick();
@@ -850,15 +1127,6 @@ async function exportCsv(){
   sortedSessions().filter(s => s.done).reverse().forEach(s => PLAN[s.day].ex.forEach(ex => { const e = s.entries && s.entries[ex.id]; doneSets(e).forEach((x, i) => rows.push([s.date, weekOf(s.date), PLAN[s.day].name, exName(ex, vOf(e)), i+1, x.kg == null ? "" : String(x.kg).replace(".", ","), x.reps])); }));
   if (rows.length === 1) { st.textContent = "Noch nichts zu exportieren."; return; }
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(";")).join("\r\n");
-  if (!downloads) {
-    try {
-      const blob = new Blob(["\ufeff" + csv], {type:"text/csv;charset=utf-8"});
-      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `ppl-trainingsbuch-${todayStr()}.csv`;
-      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-      st.textContent = "Exportiert.";
-    } catch(e) { st.textContent = "Export ist hier gerade nicht möglich."; }
-    return;
-  }
   try { const r = await downloads.save({filename:`ppl-trainingsbuch-${todayStr()}.csv`, data:"﻿" + csv}); st.textContent = r.status === "saved" ? "Exportiert." : ""; }
   catch(e) { st.textContent = e && e.code === "declined" ? "" : "Export ist hier gerade nicht möglich."; }
 }
